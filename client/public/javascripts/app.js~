@@ -1,0 +1,56 @@
+angular.module('frameworkAdmin', [])
+
+.controller('eventController', function($scope, $http) {
+
+    $scope.newEvents = {};
+    $scope.events = {};
+    $scope.lineUp = [];
+
+    $scope.addToLineUp = (artist, label) => {
+
+        if (artist, label) {
+            var ARTIST = artist.toUpperCase();
+            $scope.lineUp.push(ARTIST + ', ' + label);
+            $scope.artist = $scope.label = '';
+        }
+    };
+
+    // Get all events
+    $http.get('/api/v1/event')
+        .success((data) => {
+            $scope.events = data;
+            console.log('Events: ', data);
+        })
+        .error((err) => {
+            console.log(err);
+        });
+
+    // Create a new event
+    $scope.createEvent = () => {
+        $scope.newEvent.lineUp = $scope.lineUp;
+        console.log("Create event: ", $scope.newEvent);
+        $http.post('/api/v1/event', $scope.newEvent)
+            .success((data) => {
+                $scope.newEvent = {};
+                $scope.events = data;
+                console.log(data);
+            })
+            .error((error) => {
+                console.log(error);
+            });
+    };
+
+    // Delete an event
+    $scope.deleteEvent = (eventId) => {
+        $http.delete('/api/v1/event/' + eventId)
+            .success((data) => {
+                $scope.events = data;
+                console.log(data);
+            })
+            .error((error) => {
+                console.log(error);
+            });
+    };
+
+
+});

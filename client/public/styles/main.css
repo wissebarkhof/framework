@@ -1,0 +1,41 @@
+input {
+    margin-top: 10px;
+}
+
+.line-box {
+    border: none;
+    border-bottom: 1px solid #000;
+    border-radius: 0px;
+    margin: 10px;
+    padding: 5px;
+}
+
+.line-up {
+    width: 30%;
+    display: inline;
+}
+
+.create-event {
+    display: inline;
+    width: 45%;
+}
+
+button {
+    margin-top: 20px;
+}
+
+button:focus {
+    outline: none;
+}
+
+.pull-right {
+    float: right!;
+}
+
+.pull-left {
+    float: left!;
+}
+
+.text-left {
+    text-align: left;
+}
